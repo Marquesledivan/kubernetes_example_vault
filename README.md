@@ -1,7 +1,8 @@
 ### https://learn.hashicorp.com/tutorials/vault/kubernetes-sidecar
 ### https://learn.hashicorp.com/tutorials/vault/database-secrets
-### Para criar o Vault precisara de um S3 bucket e access_key, secret_key e deverá ser configurado no arquivo vault.yaml: linhas 6 e 7 e para o S3 na linha 80
-### As chaves da AWS deveram esta em base64
+
+Para criar o Vault Precisará de um S3 bucket e access_key, secret_key e deverá ser configurado no arquivo vault.yaml: linhas 6 e 7 e para o S3 na linha 80
+As chaves da AWS deveram esta em base64
 
 ### Após configurar será necessario seguir o passo a passo
 
