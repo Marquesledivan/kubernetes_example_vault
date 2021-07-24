@@ -12,7 +12,11 @@ kubectl apply -f vault.yaml
 
 kubectl -n vault get pods --watch
 
+### Com o output do comando execute efetue o unseal do vault
+
 kubectl -n vault exec --stdin=true --tty=true vault-0 -- vault operator init
+
+#### Preenchendo a key1,key2 e key3 com a chaves de unseal do output acima
 
 for i in key1 key2 key2
 do
@@ -28,7 +32,6 @@ kubectl -n  vault exec -it vault-0 -- /bin/sh
 export VAULT_TOKEN=" "
 
 vault auth enable kubernetes
-
 
 vault write auth/kubernetes/config \
     token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
@@ -88,18 +91,24 @@ psql
 CREATE ROLE ro NOINHERIT;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO "ro";
 
-`````
-
 SELECT usename, valuntil FROM pg_user;
 
-vault read database/creds/readonly
+```
+### Criando Policy para acesso
 
+```bash
 vault policy write web web-policy.hcl - <<EOF
 path "database/creds/readonly" {
   capabilities = ["read"]
 }
 EOF
 
+vault read database/creds/readonly
+
+```
+## Aplicando o yamlfile do web.yaml e verificando a criação do user e da senha
+
+```bash
 kubectl apply -f web.yaml
 
 kubectl get serviceaccounts
@@ -107,3 +116,13 @@ kubectl get serviceaccounts
 kubectl exec \
     $(kubectl get pod -l app=web -o jsonpath="{.items[0].metadata.name}") \
     --container web -- cat /vault/secrets/db-creds
+```
+## Acessa o banco e verifique o user criado
+```
+kubectl exec -ti \
+    $(kubectl get pod -l app=postgres -o jsonpath="{.items[0].metadata.name}") \
+    --container postgres bash
+
+SELECT usename, valuntil FROM pg_user;
+
+```
