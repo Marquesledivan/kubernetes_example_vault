@@ -134,4 +134,5 @@ SELECT usename, valuntil FROM pg_user;
 ## Referências
 
 [vault-kubernetes-sidecar](https://learn.hashicorp.com/tutorials/vault/kubernetes-sidecar)
+
 [vault-database-secrets](https://learn.hashicorp.com/tutorials/vault/database-secrets)
