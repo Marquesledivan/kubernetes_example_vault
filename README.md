@@ -1,5 +1,4 @@
-### https://learn.hashicorp.com/tutorials/vault/kubernetes-sidecar
-### https://learn.hashicorp.com/tutorials/vault/database-secrets
+                                          ######### Vault com sidecar #######
 
 Para criar o Vault Precisará de um ```S3 bucket``` e ```access_key``` ```secret_key```
 
@@ -132,3 +131,7 @@ kubectl exec -ti \
 SELECT usename, valuntil FROM pg_user;
 
 ```
+## Referências
+
+[vault-kubernetes-sidecar](https://learn.hashicorp.com/tutorials/vault/kubernetes-sidecar)
+[vault-database-secrets](https://learn.hashicorp.com/tutorials/vault/database-secrets)
