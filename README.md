@@ -4,11 +4,11 @@ Para criar o Vault precisará de um ```S3 bucket``` e ```access_key``` ```secret
 
 Configurar nas linhas  6 e 7  do ```vault.yaml``` as chaves ```access_key```  ```secret_key```
 
-As chaves da AWS deverão esta em base64
+As chaves da AWS deverão estar em base64
 
 Na linha 80 do ```vault.yaml``` configurar o S3 bucket
 
-### Após configurar será necessario seguir o passo a passo
+### Após configurar será necessário seguir o passo a passo
 
 ```bash
 kubectl create namespace vault
@@ -17,7 +17,7 @@ kubectl apply -f vault.yaml
 
 kubectl -n vault get pods --watch
 
-### Com o output do comando execute efetue o unseal do vault
+### Com o output do comando execute o unseal do vault
 
 kubectl -n vault exec --stdin=true --tty=true vault-0 -- vault operator init
 
@@ -44,7 +44,7 @@ vault write auth/kubernetes/config \
     kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 ```
 
-#### Verificar ip do banco
+#### Verificar IP do banco
 
 ```bash
 
@@ -84,7 +84,7 @@ vault write auth/kubernetes/role/web \
 
 ```
 
-#### Acessando banco para criar ROLE
+#### Acessando o banco para criar ROLE
 
 ```bash
 
@@ -99,7 +99,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO "ro";
 SELECT usename, valuntil FROM pg_user;
 
 ```
-### Criando Policy para acesso
+### Criando policy para acesso
 
 ```bash
 vault policy write web web-policy.hcl - <<EOF
@@ -122,7 +122,7 @@ kubectl exec \
     $(kubectl get pod -l app=web -o jsonpath="{.items[0].metadata.name}") \
     --container web -- cat /vault/secrets/db-creds
 ```
-## Acessa o banco e verifique o user criado
+## Acesse o banco e verifique o user criado
 ```
 kubectl exec -ti \
     $(kubectl get pod -l app=postgres -o jsonpath="{.items[0].metadata.name}") \
