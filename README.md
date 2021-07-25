@@ -1,6 +1,6 @@
                                           ######### Vault com sidecar #######
 
-Para criar o Vault Precisará de um ```S3 bucket``` e ```access_key``` ```secret_key```
+Para criar o Vault precisará de um ```S3 bucket``` e ```access_key``` ```secret_key```
 
 Configurar nas linhas  6 e 7  do ```vault.yaml``` as chaves ```access_key```  ```secret_key```
 
